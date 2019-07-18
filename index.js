@@ -30,6 +30,15 @@ function unusedImages(options) {
                     ngUsedImages.push(attribs['ng-src']);
                 }
             }
+	    //check picture source tag and detect lazy load attribute
+            else if (name === 'source') {
+                if (attribs['data-srcset']) {
+                    addUsed(attribs['data-srcset']);
+                }
+                if (attribs['srcset']) {
+                    addUsed(attribs['srcset']);
+                }
+            }
 			// eg shortcut icon apple-touch-icon, it doesnt matter if we add extras that are not images
             else if (name === 'link' && attribs.href) {
                 addUsed(attribs.href);
